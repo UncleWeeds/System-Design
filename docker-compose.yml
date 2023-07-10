@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  user_service:
+    image: user_service:latest
+    build:
+      context: ./user-service
+    ports:
+      - "3001:3001"
+
+  product_service:
+    image: product_service:latest
+    build:
+      context: ./product-service
+    ports:
+      - "3002:3002" 
+
+  order_service:
+    image: order_service:latest
+    build:
+      context: ./order-service
+    ports:
+      - "3003:3003"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+     
+  
