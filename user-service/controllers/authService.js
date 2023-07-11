@@ -1,12 +1,52 @@
 const User = require('../models/authService');
 const jwt = require("jsonwebtoken")
+const redis = require("redis")
+const DEFAULT_EXPIRATION = 3600 
 
-const createUsers = async (req, res) => {
+const redisClient = require('redis').createClient();
+
+const viewUsers = async (req, res) => {
+
+  redisClient.connect();
+  const name = req.body.name;
+
+  redisClient.on("connect", () => {
+    console.log("Connected to Redis");
+  });
+
+  const value = await redisClient.get(name);
+  if ( value != null) {
+    const parsedValue = JSON.parse(value);
+    return res.json(parsedValue);
+  }
+ else ( value == null) 
+  User.findOne({ name })
+  .then((user) => {
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+  
+    redisClient.setEx(name, DEFAULT_EXPIRATION, JSON.stringify(user));
+    return res.json(user);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
+
+
+
+  
+
+
+    
+
+async function createUsers(req, res) {
     const { name, email, password } = req.body;
 
     const userExists = await User.findOne({ email });
-    if(userExists) {
-        return res.json({ message: "User already exists"});
+    if (userExists) {
+        return res.json({ message: "User already exists" });
     } else {
         const newUser = new User({
             name,
@@ -42,7 +82,23 @@ const userLogin = async (req, res) => {
     }
 };
 
+
+
+const deleteUsers = (req, res) => {
+    const { name , email } = req.body;
+
+    User.findOneAndDelete({ name, email })
+    .then((deletedUser) => {
+
+      if (!deletedUser) {
+        return res.status(404).json({ message: 'User not found do something you idiot' });
+      }
+
+      return res.status(204).json({ message: 'User has been removed you sico'} );
+        })
+};
+
 module.exports = {
-    createUsers, userLogin
+    createUsers, userLogin, viewUsers, deleteUsers
    }
 
