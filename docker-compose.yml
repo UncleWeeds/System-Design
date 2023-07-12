@@ -21,6 +21,13 @@ services:
     ports:
       - "3003:3003"
 
+  nginx:
+    image: my_nginx
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+
   rabbitmq:
     image: rabbitmq:3-management
     ports:
