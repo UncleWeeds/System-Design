@@ -6,13 +6,17 @@ services:
       context: ./user-service
     ports:
       - "3001:3001"
+    networks:
+      - my_network
 
   product_service:
     image: product_service:latest
     build:
       context: ./product-service
     ports:
-      - "3002:3002" 
+      - "3002:3002"
+    networks:
+      - my_network
 
   order_service:
     image: order_service:latest
@@ -20,6 +24,8 @@ services:
       context: ./order-service
     ports:
       - "3003:3003"
+    networks:
+      - my_network
 
   nginx:
     image: my_nginx
@@ -27,16 +33,25 @@ services:
       context: ./nginx
     ports:
       - "80:80"
+    networks:
+      - my_network
 
   rabbitmq:
     image: rabbitmq:3-management
     ports:
       - '5672:5672'
       - '15672:15672'
+    networks:
+      - my_network
 
   redis:
     image: redis:latest
     ports:
       - '6379:6379'
+    networks:
+      - my_network
+
+networks:
+  my_network:
      
   
