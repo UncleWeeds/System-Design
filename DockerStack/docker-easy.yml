@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  nginx:
+    image: uweeds/my_nginx007:latest
+    ports:
+      - "80:80"
+
+  user_service:
+    image: uweeds/user_service:latest
+    ports:
+      - "3001:3001"
+
+  product_service:
+    image: uweeds/product_service:latest
+    ports:
+      - "3002:3002"
+
+  order_service:
+    image: uweeds/order-service:latest
+    ports:
+      - "3003:3003"
+
+  rabbitmq:
+    image: rabbitmq:latest
+    ports:
+      - "5672:5672"
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
