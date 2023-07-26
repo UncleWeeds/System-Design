@@ -1,11 +1,12 @@
 const User = require('../models/authService');
 const jwt = require("jsonwebtoken")
-const redis = require("redis")
-const DEFAULT_EXPIRATION = 3600 
+const DEFAULT_EXPIRATION = 3600
 
-const redisClient = require('redis').createClient();
+const { createClient } = require('redis');
 
-const viewUsers = async (req, res) => {
+const redisClient = createClient({ url: 'redis://redis:6379' });
+
+async function viewUsers(req, res) {
 
   redisClient.connect();
   const name = req.body.name;
@@ -15,24 +16,25 @@ const viewUsers = async (req, res) => {
   });
 
   const value = await redisClient.get(name);
-  if ( value != null) {
+  if (value !== null) {
     const parsedValue = JSON.parse(value);
     return res.json(parsedValue);
   }
- else ( value == null) 
+  else (value == null);
   User.findOne({ name })
-  .then((user) => {
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-  
-    redisClient.setEx(name, DEFAULT_EXPIRATION, JSON.stringify(user));
-    return res.json(user);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      redisClient.setEx(name, DEFAULT_EXPIRATION, JSON.stringify(user));
+      return res.json(user);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }
+
 
 
 
