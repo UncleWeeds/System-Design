@@ -10,7 +10,7 @@ const Order = require('./models/order.js');
 var channel, connection;
 
  async function connect() {
-   connection = await amqplib.connect('amqp://localhost')
+   connection = await amqplib.connect('amqp://rabbitmq:5672')
    channel= await connection.createChannel();
   await channel.assertQueue("ORDER", {durable: false});
 
