@@ -1,32 +1,69 @@
-#Basic Microservices for Online Shopping Platform (Work in Progress)
+# Basic Microservices for Online Shopping Platform (Work in Progress)
 
-This repository contains a basic implementation of an online shopping platform using a microservices architecture. The system is designed to achieve scalability and efficiency by breaking down the functionalities into the following microservices:
+# Setting up the Online Shopping Platform on Your PC
+Prerequisites:
 
-User Service
-The User Service manages user profiles, authentication, and authorization. It includes the following features:
+Make sure you have Docker installed on your PC. If not, you can download and install Docker from the official website: https://docs.docker.com/get-docker/
 
-User Registration: Allows new users to create an account by providing necessary information such as username, email, and password.
+Git: Install Git if you don't have it on your PC. You can download Git from here: https://git-scm.com/downloads
 
-User Login: Handles user authentication and generates access tokens for secure communication with other services.
+# Step 1: Clone the Repository
+Open a terminal or command prompt and run the following command to clone the repository to your local machine:
 
-user Delete: You can delete your account.
+$ git clone <repository_url>
 
-user View: You can view your user account info.
+Replace <repository_url> with the URL of your Git repository.
 
-Product Service
-The Product Service manages the product catalog, including storing and retrieving product information. Key features include:
+# Step 2: Navigate to the Project Directory
+Change your current working directory to the project folder:
+$ cd online-shopping-platform
 
-Product Creation: Allows authorized users (admins) to add new products to the catalog with details such as name, description, price, and availability.
+# Step 3: Start the Online Shopping Platform
+Run Docker Compose to start all the services:
+$ docker-compose up -d
 
-Product Retrieval: Provides APIs to fetch product details based on product IDs, categories, or search queries.
+This command will build and start the containers defined in the docker-compose.yml file. The -d flag runs the containers in the background.
 
-Product Update and Deletion: Allows authorized users to update product information or remove products from the catalog.
+Verify that all the containers are running:
+$ docker-compose ps
 
-Cart Service
-The Cart Service manages operations related to the user's shopping cart. It provides the following functionalities:
+You should see a list of running containers for the user service, product service, order service, Nginx, RabbitMQ, and Redis.
 
-Add to Cart: Enables users to add products to their shopping cart.
+# Step 4: Access the Online Shopping Platform
+The Online Shopping Platform is now up and running on your PC. You can access it through your web browser:
+Online Shopping Platform: http://localhost/
+or also using Nginx
 
-Remove from Cart: Allows users to remove products from the cart if they change their minds.
+# Step 5: Scaling the Microservices with Docker Swarm (If you want to scale the services!!!)
+Docker Swarm is a native clustering and orchestration tool provided by Docker for managing a swarm of Docker nodes. It allows you to deploy and manage services across multiple nodes in a cluster.
+
+Here's how you can scale a specific microservice using Docker Swarm:
+
+Initialize Docker Swarm (if you haven't already):
+$ docker swarm init
+
+Open a terminal or command prompt.
+
+Navigate to the project directory (if you're not already there):
+$ cd online-shopping-platform
+
+Deploy the services defined in the docker-compose.yml file as a stack in Docker Swarm:
+$ docker stack deploy -c docker-compose.yml spider
+
+This command deploys the services defined in docker-compose.yml and creates a stack named "spider" in Docker Swarm.
+
+# Step 6: Stopping the Online Shopping Platform
+To stop the Online Shopping Platform and remove the swarm of containers, run the following command:
+
+$ docker swarm rm spider
+
+This will stop and remove the containers.
+
+That's it! Now you've successfully scaled the microservices using Docker Swarm. Docker Swarm will manage the distribution of replicas across the nodes in the swarm to handle more traffic and increase the availability of your application.
+
+
+
+
+
 
 
