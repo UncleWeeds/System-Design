@@ -1,4 +1,5 @@
-Basic Microservices for Online Shopping Platform (Work in Progress)
+#Basic Microservices for Online Shopping Platform (Work in Progress)
+
 This repository contains a basic implementation of an online shopping platform using a microservices architecture. The system is designed to achieve scalability and efficiency by breaking down the functionalities into the following microservices:
 
 User Service
