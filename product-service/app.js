@@ -12,7 +12,7 @@ app.use('/product', authService)
 var channel, connection, order;
 
  async function connect() {
-   connection = await amqplib.connect('amqp://localhost')
+   connection = await amqplib.connect('amqp://rabbitmq:5672')
    channel= await connection.createChannel();
   await channel.assertQueue("PRODUCT", {durable: false});
 
