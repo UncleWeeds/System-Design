@@ -1,32 +1,65 @@
-version: '3'
-
+version: '3.9'
 services:
-  nginx:
-    image: uweeds/my_nginx007:latest
-    ports:
-      - "80:80"
-
   user_service:
-    image: uweeds/user_service:latest
+    image: uweeds/user_service1:latest
     ports:
       - "3001:3001"
+    networks:
+      - my_network
+    deploy:
+      replicas: 3
+      resources:  
+        limits:
+          cpus: '0.5'
+          memory: '50M'  
 
   product_service:
-    image: uweeds/product_service:latest
+    image: uweeds/product_service1:latest
     ports:
       - "3002:3002"
+    networks:
+      - my_network
+    deploy:
+      replicas: 3
+      resources:  
+        limits:
+          cpus: '0.5'
+          memory: '50M'  
 
   order_service:
-    image: uweeds/order-service:latest
+    image: uweeds/order_service1:latest
     ports:
       - "3003:3003"
+    networks:
+      - my_network
+    deploy:
+      replicas: 3
+      resources:  
+        limits:
+          cpus: '0.5'
+          memory: '50M'  
+  nginx:
+    image: uweeds/my_nginx:latest
+    ports:
+      - "80:80"
+      - "8080:8080"
+    networks:
+      - my_network
 
   rabbitmq:
     image: rabbitmq:latest
     ports:
-      - "5672:5672"
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - my_network
 
   redis:
     image: redis:latest
     ports:
-      - "6379:6379"
+      - '6379:6379'
+    networks:
+      - my_network
+
+networks:
+  my_network:
