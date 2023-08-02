@@ -66,7 +66,7 @@ Before running the Online Shopping Platform, you must configure the necessary en
 
 Copy .env.sample File:
 
-Start by making a copy of the provided .env.sample file in the same directory as the README.
+Start by copying the provided .env.sample file in the root directory of all three services.
 Rename the copied file to .env. The filename must be exactly .env for Docker Compose to pick up the environment variables automatically.
 Edit the .env File:
 
