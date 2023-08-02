@@ -1,5 +1,4 @@
-
-  version: '3.9'
+version: '3.9'
 services:
   user_service:
     image: uweeds/user_service1:latest
@@ -9,12 +8,7 @@ services:
       - "3001:3001"
     networks:
       - my_network
-    deploy:
-      replicas: 3
-      resources:  
-        limits:
-          cpus: '0.5'
-          memory: '50M'  
+     
 
   product_service:
     image: uweeds/product_service1:latest
@@ -24,12 +18,7 @@ services:
       - "3002:3002"
     networks:
       - my_network
-    deploy:
-      replicas: 3
-      resources:  
-        limits:
-          cpus: '0.5'
-          memory: '50M'  
+      
 
   order_service:
     image: uweeds/order_service1:latest
@@ -39,12 +28,7 @@ services:
       - "3003:3003"
     networks:
       - my_network
-    deploy:
-      replicas: 3
-      resources:  
-        limits:
-          cpus: '0.5'
-          memory: '50M'  
+   
   nginx:
     image: uweeds/my_nginx:latest
     build:
