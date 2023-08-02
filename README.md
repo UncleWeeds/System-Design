@@ -61,6 +61,22 @@ This will stop and remove the containers.
 
 That's it! Now you've successfully scaled the microservices using Docker Swarm. Docker Swarm will manage the distribution of replicas across the nodes in the swarm to handle more traffic and increase the availability of your application.
 
+# Setting up Environment Variables
+Before running the Online Shopping Platform, you must configure the necessary environment variables using the .env file. Here's how you can set it up:
+
+Copy .env.sample File:
+
+Start by making a copy of the provided .env.sample file in the same directory as the README.
+Rename the copied file to .env. The filename must be exactly .env for Docker Compose to pick up the environment variables automatically.
+Edit the .env File:
+
+Open the .env file in a text editor of your choice.
+Locate the placeholder value for MONGO_URI, and replace it with your actual MongoDB URI.
+Example:
+
+MONGO_URI=mongodb+srv://your_username:your_password@your_cluster_url/your_database_name?retryWrites=true&w=majority
+Replace your_username, your_password, your_cluster_url, and your_database_name with your MongoDB credentials and cluster information.
+
 
 
 
