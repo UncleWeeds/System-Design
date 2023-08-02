@@ -77,6 +77,11 @@ Example:
 MONGO_URI=mongodb+srv://your_username:your_password@your_cluster_url/your_database_name?retryWrites=true&w=majority
 Replace your_username, your_password, your_cluster_url, and your_database_name with your MongoDB credentials and cluster information.
 
+#FlowChart
+
+![user interface](https://github.com/UncleWeeds/Task/assets/122569256/20cbb28b-95c7-409c-bb50-783c77125fe6)
+
+
 
 
 
