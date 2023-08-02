@@ -1,43 +1,62 @@
-version: '3.9'
+
+  version: '3.9'
 services:
   user_service:
-    image: user_service:latest
+    image: uweeds/user_service1:latest
     build:
       context: ./user-service
     ports:
       - "3001:3001"
     networks:
       - my_network
+    deploy:
+      replicas: 3
+      resources:  
+        limits:
+          cpus: '0.5'
+          memory: '50M'  
 
   product_service:
-    image: product_service:latest
+    image: uweeds/product_service1:latest
     build:
       context: ./product-service
     ports:
       - "3002:3002"
     networks:
       - my_network
+    deploy:
+      replicas: 3
+      resources:  
+        limits:
+          cpus: '0.5'
+          memory: '50M'  
 
   order_service:
-    image: order_service:latest
+    image: uweeds/order_service1:latest
     build:
       context: ./order-service
     ports:
       - "3003:3003"
     networks:
       - my_network
-
+    deploy:
+      replicas: 3
+      resources:  
+        limits:
+          cpus: '0.5'
+          memory: '50M'  
   nginx:
-    image: my_nginx
+    image: uweeds/my_nginx:latest
     build:
       context: ./nginx
     ports:
       - "80:80"
+      - "8080:8080"
     networks:
       - my_network
 
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:latest
     ports:
       - '5672:5672'
       - '15672:15672'
@@ -53,5 +72,3 @@ services:
 
 networks:
   my_network:
-     
-  
