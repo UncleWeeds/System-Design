@@ -1,4 +1,4 @@
-# Basic Microservices for Online Shopping Platform (Work in Progress)
+# Basic Microservices for Online Shopping Platform
 
 # Setting up the Online Shopping Platform on Your PC
 Prerequisites:
